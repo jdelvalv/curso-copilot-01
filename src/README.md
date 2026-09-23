@@ -1,24 +1,25 @@
 # Mergington High School Activities API
 
-A super simple FastAPI application that allows students to view and sign up for extracurricular activities.
+A simple FastAPI application that allows students to view, join and leave extracurricular activities.
 
 ## Features
 
 - View all available extracurricular activities
 - Sign up for activities
+- Remove a student from an activity
 
 ## Getting Started
 
-1. Install the dependencies:
+1. From the repository root, install the dependencies:
 
    ```
-   pip install fastapi uvicorn
+   pip install -r requirements.txt
    ```
 
 2. Run the application:
 
    ```
-   python app.py
+   uvicorn src.app:app --reload
    ```
 
 3. Open your browser and go to:
@@ -31,20 +32,20 @@ A super simple FastAPI application that allows students to view and sign up for 
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/signup?email=student@mergington.edu` | Remove a student from an activity                                   |
 
-## Data Model
+## Tests
 
-The application uses a simple data model with meaningful identifiers:
+Run the backend tests from the repository root:
 
-1. **Activities** - Uses activity name as identifier:
+```
+pytest
+```
 
-   - Description
-   - Schedule
-   - Maximum number of participants allowed
-   - List of student emails who are signed up
+To run only the API tests:
 
-2. **Students** - Uses email as identifier:
-   - Name
-   - Grade level
+```
+pytest tests/test_app.py -q
+```
 
-All data is stored in memory, which means data will be reset when the server restarts.
+Activity data is stored in memory, so it resets when the server restarts.
